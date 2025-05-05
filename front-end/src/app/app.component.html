@@ -1,0 +1,17 @@
+<body>
+  <h1>Transaction fraud detector</h1>
+  <div id="container">
+  </div>
+  <div id="popup">
+    @if(nodeInfo.id) {
+      <span>
+        <div>
+        <div id="nodelabel" [style]="nodeInfo.color == 'orange' ? 'backgroundColor: orange' : 'backgroundColor: yellow'">
+        </div> {{nodeInfo.label}}
+        </div>
+        <br>
+        Id: {{nodeInfo.id}}
+      </span>
+    }
+  </div>
+</body>
