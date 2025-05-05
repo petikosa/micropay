@@ -4,3 +4,4 @@
 
 export type { Account } from './models/account';
 export type { Graph } from './models/graph';
+export { RelationshipLabel } from './models/relationship-label';

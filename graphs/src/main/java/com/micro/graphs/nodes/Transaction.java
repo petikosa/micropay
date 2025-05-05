@@ -20,8 +20,8 @@ public class Transaction {
 
     private String label = "TRANSACTION";
 
-//    @Relationship(type = "BENEFITS_TO", direction = Relationship.Direction.OUTGOING)
-//    private Account account;
+    @Relationship(type = "BENEFITS_TO", direction = Relationship.Direction.OUTGOING)
+    private Account account;
 
     public String getLabel() {
         return label;
@@ -51,11 +51,11 @@ public class Transaction {
         this.date = date;
     }
 
-//    public Account getAccount() {
-//        return account;
-//    }
-//
-//    public void setAccount(Account account) {
-//        this.account = account;
-//    }
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
+    }
 }

@@ -9,6 +9,7 @@ import {
   PanInteraction,
   ZoomInteraction
 } from '@neo4j-nvl/interaction-handlers';
+import {RelationshipLabel} from './api/models/relationship-label';
 
 @Component({
   standalone: true,
@@ -30,12 +31,9 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
-    this.graphsService.getAccount({accountNumber: 1})
-      .subscribe(account => this.account = account);
-    this.graphsService.findAllCustom().subscribe(map => {
-      const nodes: Node[] = this.convertNodes(map.nodes);
-      const relationships: Relationship[] = this.convertRelationships(map.relationships);
+    this.graphsService.findAllCustom().subscribe(graph => {
+      const nodes: Node[] = this.convertNodes(graph.nodes);
+      const relationships: Relationship[] = this.convertRelationships(graph.relationships);
       console.log(nodes);
       console.log(relationships);
       const container = <HTMLElement>document.getElementById('container');
@@ -54,6 +52,7 @@ export class AppComponent implements OnInit {
     container.addEventListener('click', (e) => {
       const { nvlTargets } = myNvl.getHits(e)
       if (nvlTargets.nodes.length > 0) {
+        console.log('nvlTargets.nodes[0].data', nvlTargets.nodes[0].data);
         this.nodeInfo = {
           id: nvlTargets.nodes[0].data.id,
           label: nvlTargets.nodes[0].data.color === 'orange' ? 'ACCOUNT' : 'TRANSACTION',
@@ -85,14 +84,14 @@ export class AppComponent implements OnInit {
     return 'yellow';
   }
 
-  private convertRelationships(relationships: Array<{ id?: number; from?: number; to?: number }> | undefined): Relationship[] {
+  private convertRelationships(relationships: Array<{ id?: number; from?: number; to?: number; label?: RelationshipLabel }> | undefined): Relationship[] {
     const newRelationships: Relationship[] = [];
     relationships?.forEach(relationship => {
       newRelationships.push({
         id: relationship.id?.toString() || '',
         from: relationship.from?.toString() || '',
         to: relationship.to?.toString() || '',
-        caption: "PERFORMS",
+        caption: relationship.label === RelationshipLabel.Performs ? 'PERFORMS' : 'BENEFITS_TO',
         captionSize: 3
       })
     })

@@ -1,6 +1,6 @@
 package com.micro.graphs;
 
-import com.micro.graphs.services.AccountService;
+import com.micro.graphs.services.GraphService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.neo4j.driver.Driver;
@@ -51,8 +51,8 @@ class GraphsApplicationTests {
     }
 
     @Test
-    void findAccountByAccountNumber(@Autowired AccountService accountService) {
-        assertThat(accountService.findByAccountNumber(1))
+    void findAccountByAccountNumber(@Autowired GraphService graphService) {
+        assertThat(graphService.findByAccountNumber(1))
                 .extracting(a -> a.getAccountNumber()).isEqualTo(1);
     }
 

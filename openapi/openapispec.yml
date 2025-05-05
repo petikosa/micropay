@@ -48,6 +48,11 @@ paths:
 
 components:
   schemas:
+    RelationshipLabel:
+      type: string
+      enum:
+        - PERFORMS
+        - BENEFITS_TO
     Account:
       type: object
       properties:
@@ -79,3 +84,5 @@ components:
                 type: integer
               to:
                 type: integer
+              label:
+                $ref: "#/components/schemas/RelationshipLabel"
