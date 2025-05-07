@@ -1,10 +1,26 @@
 h1 {
   font-size: 3.125rem;
-  color: white;
-  font-weight: 500;
+  color: cyan;
+  font-weight: 800;
   line-height: 100%;
   letter-spacing: -0.125rem;
   margin: 0.5em;
+  margin-right: 0.4rem;
+}
+
+h2 {
+  font-size: 0.8rem;
+  color: white;
+  font-weight: 500;
+  text-transform: uppercase;
+  line-height: 90%;
+  margin-top: 35px;
+}
+
+.logo {
+  display: flex;
+  width: 200px;
+  height: 100px;
 }
 
 body {
@@ -22,30 +38,40 @@ body {
   margin: 0;
 }
 
-#container {
-  height: 100%;
-  width: 100%;
-}
-
-#popup {
-  height: 120px;
-  width: 200px;
-  position: absolute;
+.button {
+  min-width: 100px;
+  height: 37px;
+  border-radius: 20px;
   border: 1px solid white;
-  border-radius: 15px;
-  top: 20px;
-  right: 20px;
-  padding: 10px;
   color: white;
+  background-color: transparent;
+  font-size: 0.9rem;
 }
 
-#nodelabel {
-  background-color: white;
-  height: 25px;
-  width: 25px;
-  border-radius: 30%;
-  float: left;
-  margin-right: 10px;
-  margin-bottom: 0;
-  padding-bottom: 0;
+.button:hover {
+  background-color: cyan;
+  border: 1px solid cyan;
+  color: black;
+  cursor: pointer;
+}
+
+.buttons {
+  margin-top: 35px;
+  margin-left: 40px;
+  margin-right: 1.2em;
+}
+
+.menu {
+  display: flex;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.user {
+  color: white;
+  font-size: 0.9rem;
+  margin-right: 1em;
 }

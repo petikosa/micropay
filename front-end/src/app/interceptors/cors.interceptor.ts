@@ -6,7 +6,5 @@ export function corsInterceptor(req: HttpRequest<unknown>, next: HttpHandlerFn):
   const authReq = req.clone({
     headers: req.headers.set('Access-Control-Allow-Origin', '*')
   });
-  console.log('CORS Interceptor');
-  console.log(authReq);
   return next(req);
 }
