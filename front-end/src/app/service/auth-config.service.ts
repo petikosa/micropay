@@ -6,5 +6,5 @@ export const authCodeFlowConfig: AuthConfig = {
   clientId: 'micro-client',
   responseType: 'code',
   showDebugInformation: true,
-  requireHttps: false
+  requireHttps: false,
 };

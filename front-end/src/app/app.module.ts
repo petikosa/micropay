@@ -1,10 +1,11 @@
 import {NgModule} from '@angular/core';
-import {OAuthModule, OAuthStorage, provideOAuthClient} from 'angular-oauth2-oidc';
+import {OAuthModule} from 'angular-oauth2-oidc';
 import {BrowserModule} from '@angular/platform-browser';
 import {FormsModule} from '@angular/forms';
-import {HttpClientModule, provideHttpClient, withInterceptorsFromDi} from '@angular/common/http';
 import {AppComponent} from './app.component';
 import {ComponentModule} from './component/component.module';
+import {HTTP_INTERCEPTORS, provideHttpClient, withInterceptors} from '@angular/common/http';
+import {authInterceptor} from './interceptors/auth.interceptor';
 
 @NgModule({
   bootstrap: [AppComponent],
@@ -15,17 +16,23 @@ import {ComponentModule} from './component/component.module';
     BrowserModule,
     FormsModule,
     ComponentModule,
-    HttpClientModule,
     OAuthModule.forRoot({
       resourceServer: {
-        allowedUrls: ['http://localhost:8082/*', 'http://localhost:8088'],
+        allowedUrls: ['http://localhost:8082/*', 'http://localhost:8088/*', 'http://localhost:4200/*'],
         sendAccessToken: true
       }
     })
   ],
   providers: [
-    // provideHttpClient(),
-    // provideOAuthClient()
+    {
+      provide: HTTP_INTERCEPTORS,
+      useValue: authInterceptor,
+      multi: true
+
+    },
+    provideHttpClient(
+      withInterceptors([authInterceptor])
+    ),
   ],
 })
 

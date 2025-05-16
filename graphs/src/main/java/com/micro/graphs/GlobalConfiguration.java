@@ -1,42 +1,41 @@
 package com.micro.graphs;
 
-import org.neo4j.driver.Driver;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.neo4j.core.ReactiveDatabaseSelectionProvider;
-import org.springframework.data.neo4j.core.transaction.ReactiveNeo4jTransactionManager;
-import org.springframework.data.neo4j.repository.config.ReactiveNeo4jRepositoryConfigurationExtension;
-import org.springframework.transaction.ReactiveTransactionManager;
+import org.springframework.core.Ordered;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.reactive.CorsWebFilter;
 import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.util.Arrays;
+import java.util.Collections;
 
-@Configuration
+import static org.springframework.security.config.Customizer.withDefaults;
+
+@Configuration(proxyBeanMethods = false)
 public class GlobalConfiguration {
 
     @Bean
-    CorsWebFilter corsWebFilter() {
-        CorsConfiguration corsConfig = new CorsConfiguration();
-        corsConfig.setAllowedOrigins(Arrays.asList("http://localhost:4200"));
-        corsConfig.setMaxAge(8000L);
-        corsConfig.addAllowedMethod("GET");
-        corsConfig.addAllowedMethod("OPTIONS");
-        corsConfig.addAllowedHeader("access-control-allow-origin");
-
-        UrlBasedCorsConfigurationSource source =
-                new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", corsConfig);
-
-        return new CorsWebFilter(source);
+    public WebMvcConfigurer corsConfigurer() {
+        return new WebMvcConfigurer() {
+            @Override
+            public void addCorsMappings(CorsRegistry registry) {
+                registry.addMapping("/**").allowedOrigins("http://localhost:4200");
+            }
+        };
     }
 
-//    @Bean(ReactiveNeo4jRepositoryConfigurationExtension.DEFAULT_TRANSACTION_MANAGER_BEAN_NAME)
-//    public ReactiveTransactionManager reactiveTransactionManager(
-//            Driver driver,
-//            ReactiveDatabaseSelectionProvider databaseNameProvider) {
-//        return new ReactiveNeo4jTransactionManager(driver, databaseNameProvider);
-//    }
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http.cors(withDefaults());
+        return http.build();
+    }
 
 }
