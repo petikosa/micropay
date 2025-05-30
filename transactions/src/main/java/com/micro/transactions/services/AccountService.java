@@ -4,9 +4,7 @@ import com.micro.transactions.controllers.AccountDto;
 import com.micro.transactions.entities.Account;
 import com.micro.transactions.repositories.AccountRepository;
 import org.springframework.stereotype.Service;
-import reactor.core.publisher.Flux;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -18,10 +16,9 @@ public class AccountService {
         this.accountRepository = accountRepository;
     }
 
-    public Flux<AccountDto> getAllAccounts() {
-        Flux<Account> accounts = accountRepository.findAll();
-        List<AccountDto> accountDtos = new ArrayList<>();
-        return accounts.map(account -> new AccountDto(account.getId(), account.getAccountNumber()));
+    public List<AccountDto> getAllAccounts() {
+        List<Account> accounts = accountRepository.findAll();
+        return accounts.stream().map(account -> new AccountDto(account.getId(), account.getAccountNumber())).toList();
     }
 
 }

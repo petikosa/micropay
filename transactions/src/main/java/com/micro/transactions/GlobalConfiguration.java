@@ -1,4 +1,4 @@
-package com.micro.graphs;
+package com.micro.transactions;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

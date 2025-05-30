@@ -4,7 +4,8 @@ import com.micro.transactions.controllers.TransactionDto;
 import com.micro.transactions.entities.Transaction;
 import com.micro.transactions.repositories.TransactionRepository;
 import org.springframework.stereotype.Service;
-import reactor.core.publisher.Flux;
+
+import java.util.List;
 
 @Service
 public class TransactionService {
@@ -16,10 +17,10 @@ public class TransactionService {
         this.transactionRepository = transactionRepository;
     }
 
-    public Flux<TransactionDto> getAllTransactions() {
-        Flux<Transaction> transactions = transactionRepository.findAll();
-        return transactions
+    public List<TransactionDto> getAllTransactions() {
+        List<Transaction> transactions = transactionRepository.findAll();
+        return transactions.stream()
                 .map(transaction ->
-                        new TransactionDto(transaction.getId(), transaction.getAmount(), transaction.getDate()));
+                        new TransactionDto(transaction.getId(), transaction.getAmount(), transaction.getDate())).toList();
     }
 }

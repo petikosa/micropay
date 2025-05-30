@@ -11,6 +11,7 @@ import {authCodeFlowConfig} from './service/auth-config.service';
 export class AppComponent implements OnInit {
 
   userName: string = '';
+  isGraph = true;
 
   constructor(protected oauthService: OAuthService) {
   }
@@ -28,5 +29,9 @@ export class AppComponent implements OnInit {
 
   signOut() {
     this.oauthService.logOut();
+  }
+
+  toggle() {
+    this.isGraph = !this.isGraph;
   }
 }

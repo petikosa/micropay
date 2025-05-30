@@ -1,0 +1,66 @@
+openapi: 3.0.4
+info:
+  title: Transactions microservice
+  description: Provides data from a relational DB
+  version: 0.0.1
+
+servers:
+  - url: http://localhost:8084
+    description: development local server
+
+paths:
+  /transactions/transactions:
+    get:
+      summary: get all transaction data
+      tags:
+        - transactions
+      description: get it all
+      operationId: getAllTransactions
+      responses:
+        "200":
+          description: return all the transactions
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Transaction"
+  /transactions/accounts:
+    get:
+      summary: get all accounts data
+      tags:
+        - accounts
+      description: get it all
+      operationId: getAllAccounts
+      responses:
+        "200":
+          description: return all the accounts
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Account"
+
+components:
+  schemas:
+    Transaction:
+      type: array
+      items:
+        type: object
+        properties:
+          id:
+            type: integer
+          amount:
+            type: integer
+          date:
+            type: object
+          label:
+            type: string
+    Account:
+      type: array
+      items:
+        type: object
+        properties:
+          id:
+            type: integer
+          accountNumber:
+            type: integer
+          label:
+            type: string

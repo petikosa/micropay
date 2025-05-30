@@ -6,6 +6,11 @@
         <h2>Transaction fraud detector</h2>
       </div>
     </div>
+    <div class="buttonsmenu">
+      <button class="button button-right" (click)="toggle()">
+        {{ isGraph ? 'Transactions' : 'Graphs' }}
+      </button>
+    </div>
     <div class="buttons">
       @if (userName) { <span class="user">User: {{userName}}</span> }
       @if (oauthService.hasValidAccessToken()) {
@@ -19,5 +24,9 @@
       }
     </div>
   </div>
-  <app-graphs></app-graphs>
+  @if (isGraph) {
+    <app-graphs></app-graphs>
+  } @else {
+    <app-transactions></app-transactions>
+  }
 </body>

@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {GraphsService} from '../../api/services/graphs.service';
 import NVL, {Node, Relationship} from '@neo4j-nvl/base';
 import {ClickInteraction, DragNodeInteraction, PanInteraction, ZoomInteraction} from '@neo4j-nvl/interaction-handlers';
-import {RelationshipLabel} from '../../api/models/relationship-label';
+import {GraphsService} from '../../api/graphs/services/graphs.service';
+import {RelationshipLabel} from '../../api/graphs/models';
 
 @Component({
   selector: 'app-graphs',

@@ -1,0 +1,39 @@
+<div class="body">
+  <div class="transactions">
+    <h2>Transactions</h2>
+    @if (transactions) {
+      <table>
+        <tr>
+          <th>ID</th>
+          <th>Amount</th>
+          <th>Date</th>
+        </tr>
+        @for (t of transactions; track t.id) {
+          <tr>
+            <td>{{ t?.id }}</td>
+            <td>{{ t?.amount }}</td>
+            <td>{{ t?.date }}</td>
+          </tr>
+        }
+      </table>
+    }
+  </div>
+
+  <div class="transactions">
+    <h2>Accounts</h2>
+    @if (accounts) {
+      <table>
+        <tr>
+          <th>ID</th>
+          <th>Account number</th>
+        </tr>
+        @for (a of accounts; track a.id) {
+          <tr>
+            <td>{{ a?.id }}</td>
+            <td>{{ a?.accountNumber }}</td>
+          </tr>
+        }
+      </table>
+    }
+  </div>
+</div>

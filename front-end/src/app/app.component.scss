@@ -46,6 +46,12 @@ body {
   color: white;
   background-color: transparent;
   font-size: 0.9rem;
+  padding-right: 1em;
+  padding-left: 1em;
+}
+
+.button-right {
+  margin-left: 1em;
 }
 
 .button:hover {
@@ -59,6 +65,11 @@ body {
   margin-top: 35px;
   margin-left: 40px;
   margin-right: 1.2em;
+}
+
+.buttonsmenu {
+  width: 50%;
+  margin-top: 35px;
 }
 
 .menu {
