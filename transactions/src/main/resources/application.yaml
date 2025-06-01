@@ -22,6 +22,8 @@ spring:
       ddl-auto: update
     database-platform:
       dialect: org.hibernate.dialect.PostgreSQLDialect
+  kafka:
+    bootstrap-servers: localhost:9092
 server:
   port: 8084
 
