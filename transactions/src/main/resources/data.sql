@@ -1,4 +1,3 @@
-
 delete from account_transaction;
 delete from transaction_account;
 delete from account;
